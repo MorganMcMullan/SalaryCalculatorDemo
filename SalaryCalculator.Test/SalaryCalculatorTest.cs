@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SalaryCalculatorCore;
+using System;
+
 namespace SalaryCalculatorTest
 {
 	/*
@@ -14,29 +16,75 @@ namespace SalaryCalculatorTest
 	public class SalaryCalculatorTest
 	{
 		[TestMethod]
-		public void GetAnnualSalaryTest()
+		public void GetAnnualSalary_PositiveValue_ValidResult()
 		{
 			//Arrange
 			SalaryCalculator salaryCalculator = new SalaryCalculator();
 
 			//Act
-			decimal annualSalary = salaryCalculator.GetAnnualSalary(50);
+			decimal annualSalary = salaryCalculator.GetAnnualSalary(50.00m);
 
 			//Assert
-			Assert.AreEqual(104000, annualSalary);
+			Assert.AreEqual(104000.00m, annualSalary);
 		}
 
 		[TestMethod]
-		public void GetHourlySalaryTest()
+		[ExpectedException(typeof(ArgumentException))]
+		public void GetAnnualSalary_ZeroValue_ValidResult()
 		{
 			//Arrange
 			SalaryCalculator salaryCalculator = new SalaryCalculator();
 
 			//Act
-			decimal hourlySalary = salaryCalculator.GetHourlySalary(104000);
+			decimal annualSalary = salaryCalculator.GetAnnualSalary(0);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentException))]
+		public void GetAnnualSalary_NegativeValue_ArgumentExceptionThrown()
+		{
+			//Arrange
+			SalaryCalculator salaryCalculator = new SalaryCalculator();
+
+			//Act
+			decimal annualSalary = salaryCalculator.GetAnnualSalary(-50.00m);
 
 			//Assert
-			Assert.AreEqual(50, hourlySalary);
+		}
+
+		[TestMethod]
+		public void GetHourlySalary_PositiveValue_ValidResult()
+		{
+			//Arrange
+			SalaryCalculator salaryCalculator = new SalaryCalculator();
+
+			//Act
+			decimal hourlySalary = salaryCalculator.GetHourlySalary(104000.00m);
+
+			//Assert
+			Assert.AreEqual(50.00m, hourlySalary);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentException))]
+		public void GetHourlySalary_ZeroValue_ValidResult()
+		{
+			//Arrange
+			SalaryCalculator salaryCalculator = new SalaryCalculator();
+
+			//Act
+			decimal hourlySalary = salaryCalculator.GetHourlySalary(0);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentException))]
+		public void GetHourlySalary_NegativeValue_ValidResult()
+		{
+			//Arrange
+			SalaryCalculator salaryCalculator = new SalaryCalculator();
+
+			//Act
+			decimal hourlySalary = salaryCalculator.GetHourlySalary(-104000.00m);
 		}
 	}
 }

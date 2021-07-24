@@ -11,11 +11,19 @@ namespace SalaryCalculatorCore
 
 		public decimal GetAnnualSalary(decimal hourlySalary)
 		{
-			return hourlySalary * HOURS_IN_YEAR;
+			if (hourlySalary <= 0)
+			{
+				throw new ArgumentException("Hourly salary must be greater than or equal to 0");
+			}
+			return (hourlySalary * HOURS_IN_YEAR);
 		}
 
 		public decimal GetHourlySalary(decimal annaulSalary)
 		{
+			if (annaulSalary <= 0)
+			{
+				throw new ArgumentException("Annual salary must be greater than to 0");
+			}
 			return annaulSalary / HOURS_IN_YEAR;
 		}
 	}
