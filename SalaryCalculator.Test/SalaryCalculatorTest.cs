@@ -15,76 +15,94 @@ namespace SalaryCalculatorTest
 	[TestClass]
 	public class SalaryCalculatorTest
 	{
-		[TestMethod]
-		public void GetAnnualSalary_PositiveValue_ValidResult()
+		[TestClass]
+		public class GetAnnualSalaryTest
 		{
-			//Arrange
-			SalaryCalculator salaryCalculator = new SalaryCalculator();
+			[TestMethod]
+			public void GetAnnualSalary_PositiveValue_ValidResult()
+			{
+				//Arrange
+				SalaryCalculator salaryCalculator = new SalaryCalculator();
 
-			//Act
-			decimal annualSalary = salaryCalculator.GetAnnualSalary(50.00m);
+				//Act
+				decimal annualSalary = salaryCalculator.GetAnnualSalary(50.00m);
 
-			//Assert
-			Assert.AreEqual(104000.00m, annualSalary);
+				//Assert
+				Assert.AreEqual(104000.00m, annualSalary);
+			}
+
+			[TestMethod]
+			[ExpectedException(typeof(ArgumentException))]
+			public void GetAnnualSalary_ZeroValue_ValidResult()
+			{
+				//Arrange
+				SalaryCalculator salaryCalculator = new SalaryCalculator();
+
+				//Act
+				decimal annualSalary = salaryCalculator.GetAnnualSalary(0);
+
+				//Assert
+				Assert.AreNotEqual(104000.00m, annualSalary);
+			}
+
+			[TestMethod]
+			[ExpectedException(typeof(ArgumentException))]
+			public void GetAnnualSalary_NegativeValue_ArgumentExceptionThrown()
+			{
+				//Arrange
+				SalaryCalculator salaryCalculator = new SalaryCalculator();
+
+				//Act
+				decimal annualSalary = salaryCalculator.GetAnnualSalary(-50.00m);
+
+				//Assert
+				Assert.AreNotEqual(104000.00m, annualSalary);
+			}
 		}
 
-		[TestMethod]
-		[ExpectedException(typeof(ArgumentException))]
-		public void GetAnnualSalary_ZeroValue_ValidResult()
+		[TestClass]
+		public class GetHourlySalaryTest
 		{
-			//Arrange
-			SalaryCalculator salaryCalculator = new SalaryCalculator();
+			[TestMethod]
+			public void GetHourlySalary_PositiveValue_ValidResult()
+			{
+				//Arrange
+				SalaryCalculator salaryCalculator = new SalaryCalculator();
 
-			//Act
-			decimal annualSalary = salaryCalculator.GetAnnualSalary(0);
-		}
+				//Act
+				decimal hourlySalary = salaryCalculator.GetHourlySalary(104000.00m);
 
-		[TestMethod]
-		[ExpectedException(typeof(ArgumentException))]
-		public void GetAnnualSalary_NegativeValue_ArgumentExceptionThrown()
-		{
-			//Arrange
-			SalaryCalculator salaryCalculator = new SalaryCalculator();
+				//Assert
+				Assert.AreEqual(50.00m, hourlySalary);
+			}
 
-			//Act
-			decimal annualSalary = salaryCalculator.GetAnnualSalary(-50.00m);
+			[TestMethod]
+			[ExpectedException(typeof(ArgumentException))]
+			public void GetHourlySalary_ZeroValue_ValidResult()
+			{
+				//Arrange
+				SalaryCalculator salaryCalculator = new SalaryCalculator();
 
-			//Assert
-		}
+				//Act
+				decimal hourlySalary = salaryCalculator.GetHourlySalary(0);
 
-		[TestMethod]
-		public void GetHourlySalary_PositiveValue_ValidResult()
-		{
-			//Arrange
-			SalaryCalculator salaryCalculator = new SalaryCalculator();
+				//Assert
+				Assert.AreNotEqual(50.00m, hourlySalary);
+			}
 
-			//Act
-			decimal hourlySalary = salaryCalculator.GetHourlySalary(104000.00m);
+			[TestMethod]
+			[ExpectedException(typeof(ArgumentException))]
+			public void GetHourlySalary_NegativeValue_ValidResult()
+			{
+				//Arrange
+				SalaryCalculator salaryCalculator = new SalaryCalculator();
 
-			//Assert
-			Assert.AreEqual(50.00m, hourlySalary);
-		}
+				//Act
+				decimal hourlySalary = salaryCalculator.GetHourlySalary(-104000.00m);
 
-		[TestMethod]
-		[ExpectedException(typeof(ArgumentException))]
-		public void GetHourlySalary_ZeroValue_ValidResult()
-		{
-			//Arrange
-			SalaryCalculator salaryCalculator = new SalaryCalculator();
-
-			//Act
-			decimal hourlySalary = salaryCalculator.GetHourlySalary(0);
-		}
-
-		[TestMethod]
-		[ExpectedException(typeof(ArgumentException))]
-		public void GetHourlySalary_NegativeValue_ValidResult()
-		{
-			//Arrange
-			SalaryCalculator salaryCalculator = new SalaryCalculator();
-
-			//Act
-			decimal hourlySalary = salaryCalculator.GetHourlySalary(-104000.00m);
+				//Assert
+				Assert.AreNotEqual(50.00m, hourlySalary);
+			}
 		}
 	}
 }
